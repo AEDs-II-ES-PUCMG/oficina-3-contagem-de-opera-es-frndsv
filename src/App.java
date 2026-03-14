@@ -34,30 +34,36 @@ public class App {
     static double nanoToMilli = 1.0/1_000_000;
 
     /**
-     * Código de teste 1. Este método...
+     * Código de teste 1. Este método recebe um vetor fornecido pelo usuario e faz a execução do for da seguinte forma: 
+     *      Se N for impar ->  Realiza o for de 0 até N - 1 
+     *      Se N for par   -> Realiza o for de 0 até N - 2
+     * Seguindo essa lógica de, quando houver a execução do for, a variável resposta recebe ela mesma mais o resto da divisão do valor que está armazenada no vetor na posição I por dois.
      * @param vetor Vetor com dados para teste.
      * @return Uma resposta que significa....
      */
     static int codigo1(int[] vetor) {
         int resposta = 0;
+        operacoes = 0;
         for (int i = 0; i < vetor.length; i += 2) {
+            operacoes++;
             resposta += vetor[i]%2;
         }
         return resposta;
     }
 
     /**
-     * Código de teste 2. Este método...
+     * Código de teste 2. Este método 
      * @param vetor Vetor com dados para teste.
      * @return Uma resposta que significa....
      */
     static int codigo2(int[] vetor) {
         int contador = 0;
+        operacoes = 0;
         for (int k = (vetor.length - 1); k > 0; k /= 2) {
             for (int i = 0; i <= k; i++) {
+                operacoes++;
                 contador++;
             }
-
         }
         return contador;
     }
@@ -67,9 +73,11 @@ public class App {
      * @param vetor Vetor com dados para teste.
      */
     static void codigo3(int[] vetor) {
+        operacoes = 0;
         for (int i = 0; i < vetor.length - 1; i++) {
             int menor = i;
             for (int j = i + 1; j < vetor.length; j++) {
+                operacoes++;
                 if (vetor[j] < vetor[menor])
                     menor = j;
             }
@@ -85,6 +93,7 @@ public class App {
      * @return Um inteiro que significa...
      */
     static int codigo4(int n) {
+        operacoes++;
         if (n <= 2)
             return 1;
         else
@@ -105,6 +114,16 @@ public class App {
         
     }
     public static void main(String[] args) {
+
+        long startTime = System.nanoTime();
+        codigo4(tamanhosTestePequeno[4]);
+        long endTime = System.nanoTime();
+        long duration = endTime - startTime;
+        double tempoExecucao = duration * nanoToMilli;
+
         
+
+        System.out.println("Quantidade de operações realizadas: " + operacoes); 
+        System.out.println("Tempo de execução: " + tempoExecucao); 
     }
 }
